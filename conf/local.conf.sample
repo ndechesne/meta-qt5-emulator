@@ -1,0 +1,20 @@
+# in order to run the qt5-example-image on the VirtualBox emulator, it
+# is recommended to add the following configuration in conf/local.conf
+# (or in another configuration file).
+
+# Qemu / RDK Emulator config
+MACHINE_EXTRA_RDEPENDS_qemux86 += "vboxguestdrivers kernel-module-snd-intel8x0"
+
+# autoload if installed
+module_autoload_snd-intel8x0 = "snd-intel8x0"
+
+IMAGE_FSTYPES += "vmdk"
+
+# Redirect console output to keep it from spewing all over the VirtualBox window
+# (This is added to qemux86 kernel cmdline by openembedded-core/meta/classes/syslinux.bbclass)
+APPEND_append_qemux86 = " console=ttyS0"
+
+DISTRO_FEATURES_append = " opengl"
+DISTRO_FEATURES_remove = "x11 bluetooth irda wifi 3g"
+
+LICENSE_FLAGS_WHITELIST += "commercial_gstreamer1.0-libav commercial_libav commercial_x264"
